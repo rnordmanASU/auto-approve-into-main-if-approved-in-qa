@@ -20,7 +20,7 @@ jobs:
                   fetch-depth: 0
             - name: Check if only contains commits in QA
               run: |
-                  if git merge-base --is-ancestor feature-1 mule-qa; then
+                  if git merge-base --is-ancestor origin/feature-1 origin/mule-qa; then
                       echo -e "\033[32mfeature-1 only contains commits found in QA"
                   else
                       echo -e "\033[31mfeature-1 contains commits not found in QA"
