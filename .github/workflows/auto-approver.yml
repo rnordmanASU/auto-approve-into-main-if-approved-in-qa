@@ -9,7 +9,7 @@ on:
 
 jobs:
     auto-approve:
-        name: Approve PRs if they only contain commits in mule-qa
+        name: Approve PRs if they only contain commits in QA
         runs-on: ubuntu-latest
         permissions:
             pull-requests: write
@@ -18,11 +18,12 @@ jobs:
               with:
                   ref: main
                   fetch-depth: 0
-            - name: Run Git operations
+            - name: Check if only contains commits in QA
               run: |
                   if git merge-base --is-ancestor feature-1 mule-qa; then
-                      echo "feature-1 is ahead of mule-qa"
+                      echo -e "\033[32mfeature-1 only contains commits found in QA"
                   else
-                      echo "mule-qa is caught up with feature-1"
+                      echo -e "\033[31mfeature-1 contains commits not found in QA"
+                      exit 1;
                   fi
             - uses: hmarr/auto-approve-action@v3
