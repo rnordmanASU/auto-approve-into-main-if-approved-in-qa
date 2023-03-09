@@ -27,3 +27,5 @@ jobs:
                       exit 1;
                   fi
             - uses: hmarr/auto-approve-action@v3
+              with:
+                  token: ${{ secrets.GITHUB_TOKEN }}
