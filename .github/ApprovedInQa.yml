@@ -1,0 +1,27 @@
+name: Autoapprove PRs that contain only commits that exist in QA.
+
+on:
+    pull_request:
+        types: [opened, ready_for_review, reopened, edited]
+        branches:
+            - 'main'
+
+jobs:
+    auto-approve:
+        name: Approve PRs if they only contain commits in mule-qa
+        runs-on: ubuntu-latest
+        permissions:
+            pull-requests: write
+        steps:
+            - uses: actions/checkout@v2
+              with:
+                  ref: main
+                  fetch-depth: 0
+            - name: Run Git operations
+              run: |
+                  if [[ $(git log mule-qa..feature-1) ]]; then
+                      echo "feature-1 is ahead of mule-qa"
+                  else
+                      echo "mule-qa is caught up with feature-1"
+                  fi
+            - uses: hmarr/auto-approve-action@v3
