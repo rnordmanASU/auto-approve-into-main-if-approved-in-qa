@@ -5,6 +5,7 @@ on:
         types: [opened, ready_for_review, reopened, edited]
         branches:
             - 'main'
+    workflow_dispatch:
 
 jobs:
     auto-approve:
@@ -19,7 +20,7 @@ jobs:
                   fetch-depth: 0
             - name: Run Git operations
               run: |
-                  if [[ $(git log mule-qa..feature-1) ]]; then
+                  if git merge-base --is-ancestor feature-1 mule-qa; then
                       echo "feature-1 is ahead of mule-qa"
                   else
                       echo "mule-qa is caught up with feature-1"
