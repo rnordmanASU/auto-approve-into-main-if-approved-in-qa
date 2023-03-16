@@ -13,7 +13,7 @@ jobs:
         runs-on: ubuntu-latest
         permissions:
             pull-requests: write
-    steps:  
-      - uses: rnordmanASU/conditionally-approve-pr-containing-only-trusted-commits@main
-        with:
-            trusted-branch: mule-qa
+        steps:  
+            - uses: rnordmanASU/conditionally-approve-pr-containing-only-trusted-commits@main
+              with:
+                trusted-branch: mule-qa
