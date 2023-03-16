@@ -2,7 +2,7 @@ name: Autoapprove PRs that contain only commits that exist in QA.
 
 on:
     pull_request:
-        types: [opened, ready_for_review, reopened, edited]
+        types: [opened, synchronize, reopened]
         branches:
             - 'main'
     workflow_dispatch:
@@ -16,4 +16,4 @@ jobs:
         steps:  
             - uses: rnordmanASU/conditionally-approve-pr-containing-only-trusted-commits@main
               with:
-                trusted-branch: mule-qa
+                trusted-branches: 'main; mule-qa'
