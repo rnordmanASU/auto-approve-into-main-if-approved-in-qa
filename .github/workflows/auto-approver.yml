@@ -1,11 +1,10 @@
 name: Autoapprove PRs that contain only commits that exist in QA.
 
 on:
-    pull_request:
+    pull_request_target:
         types: [opened, synchronize, reopened]
         branches:
             - 'main'
-    workflow_dispatch:
 
 jobs:
     auto-approve:
@@ -16,4 +15,4 @@ jobs:
         steps:  
             - uses: rnordmanASU/conditionally-approve-pr-containing-only-trusted-commits@main
               with:
-                trusted-branches: 'main; mule-qa'
+                trusted-branches: 'mule-qa'
