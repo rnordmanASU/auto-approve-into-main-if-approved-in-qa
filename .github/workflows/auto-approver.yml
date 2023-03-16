@@ -2,7 +2,7 @@ name: Autoapprove PRs that contain only commits that exist in QA.
 
 on:
     pull_request:
-        types: [opened, ready_for_review, reopened, edited]
+        types: [opened, synchronize, reopened]
         branches:
             - 'main'
     workflow_dispatch:
