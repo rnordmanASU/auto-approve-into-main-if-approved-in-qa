@@ -5,7 +5,6 @@ on:
         types: [opened, synchronize, reopened]
         branches:
             - 'main'
-    workflow_dispatch:
 
 jobs:
     auto-approve:
@@ -16,4 +15,4 @@ jobs:
         steps:  
             - uses: rnordmanASU/conditionally-approve-pr-containing-only-trusted-commits@main
               with:
-                trusted-branches: 'main; mule-qa'
+                trusted-branches: 'fake-qa'
