@@ -13,19 +13,7 @@ jobs:
         runs-on: ubuntu-latest
         permissions:
             pull-requests: write
-        steps:
-            - uses: actions/checkout@v3
-              with:
-                  ref: main
-                  fetch-depth: 0
-            - name: Check if only contains commits in QA
-              run: |
-                  if git merge-base --is-ancestor origin/${{ github.head_ref }} origin/mule-qa; then
-                      echo -e "\033[32m${{ github.head_ref }} only contains commits found in QA"
-                  else
-                      echo -e "\033[31m${{ github.head_ref }} contains commits not found in QA"
-                      exit 1;
-                  fi
-            - uses: hmarr/auto-approve-action@v3
-              with:
-                  github-token: ${{ secrets.GITHUB_TOKEN }}
+    steps:  
+      - uses: rnordmanASU/conditionally-approve-pr-containing-only-trusted-commits@main
+        with:
+            trusted-branch: mule-qa
